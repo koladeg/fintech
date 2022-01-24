@@ -8,6 +8,7 @@ import Tabs from './navigation/tabs';
 
 function HomeScreen() {
   return (
+    
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
       <StatusBar style="auto" />
@@ -21,7 +22,13 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Tabs} />
+        <Stack.Screen 
+          name="Home" 
+          component={Tabs} 
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

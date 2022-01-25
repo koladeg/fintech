@@ -5,7 +5,7 @@ import { Entypo, Ionicons } from '@expo/vector-icons';
 import { Icon } from 'react-native-elements';
 import { AddItem, ListItem } from '../components';
 
-const Home = ({navigation}) => {
+const TransactionScreen = ({navigation}) => {
 
     function renderHeader() {
         return (
@@ -26,37 +26,39 @@ const Home = ({navigation}) => {
             >
 
             {/* { title} */}
-            <View
+            <TouchableOpacity
                 style={{
                     marginTop: SIZES.padding * 3,
                     width: "100%",
+                    flexDirection:'row',
                     alignItems: "flex-start",
                     paddingHorizontal: SIZES.padding
                 }}
+                onPress={() => navigation.goBack()}
             >
+                <Entypo name="chevron-left" size={25} color="white" />
+                
                 <Text
-                style={{ color: COLORS.white, ...FONTS.h1}}
+                style={{ marginLeft: SIZES.base, color: COLORS.white, ...FONTS.h3}}
                 >
                     Accounts
                 </Text>
-            </View>
+            </TouchableOpacity>
 
             {/* { account card info} */}
-            <TouchableOpacity 
+            <View 
                 style={styles.addContainer} 
-                onPress={() => navigation.navigate("Transactions", 
-                {card: "Appetiser"} )}
             >
                 <Image resizeMode={'contain'} style={styles.addImage} source={require('../assets/images/card.png')}/>
                 <View style={styles.addText}>
                     <Text style={{ color: COLORS.white, ...FONTS.h4}}>Appetiser Premium Access</Text>
                 </View>
-                <TouchableOpacity style={styles.arrow} onPress={()=>{
+                <View style={styles.arrow} onPress={()=>{
                 }}>
 
-                    <Entypo name="chevron-right" size={25} color="white" />
-                </TouchableOpacity>
-            </TouchableOpacity>
+                    <Entypo name="dots-three-vertical" size={19} color="white" />
+                </View>
+            </View>
 
             {/* { account card info} */}
             <View
@@ -104,40 +106,14 @@ const Home = ({navigation}) => {
         
     }
 
-    function renderCards() {
-        return(
-            <View>
-                <ListItem 
-                    image={require('../assets/images/credit_card.png')} 
-                    text="Appetiser Saver"
-                    price="$8,183.00"
-                />
-
-                <ListItem 
-                    styles={{ width: 75}}
-                    image={require('../assets/images/credit_card1.png')} 
-                    text="Appetiser Saver"
-                    price="$8,183.00"
-                />
-
-                <AddItem 
-                    text="Open a New Account"
-                />
-
-            </View>
-        )
-    }
     return (
-        <ScrollView>
-            <View style={{ flex: 1, paddingBottom: 130}}>
-                {renderHeader()}
-                {renderCards()}
-            </View>
-        </ScrollView>
+        <View>
+            {renderHeader()}
+        </View>
     )
 }
 
-export default Home
+export default TransactionScreen
 
 const styles = StyleSheet.create({
 

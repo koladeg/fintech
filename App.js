@@ -5,6 +5,7 @@ import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Tabs from './navigation/tabs';
+import TransactionScreen from './screens/TransactionScreen';
 
 function HomeScreen() {
   return (
@@ -23,8 +24,16 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen 
-          name="Home" 
+          name="HomeScreen" 
           component={Tabs} 
+          options={{
+            headerShown: false,
+          }}
+        />
+
+      <Stack.Screen 
+          name="Transactions" 
+          component={TransactionScreen} 
           options={{
             headerShown: false,
           }}

@@ -1,4 +1,4 @@
 import ListItem from "./ListItem";
+import AddItem from "./AddItem";
 
-
-export { ListItem }
+export { ListItem, AddItem }

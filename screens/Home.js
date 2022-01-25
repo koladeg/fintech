@@ -3,7 +3,7 @@ import { Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity,
 import { dummyData, COLORS, SIZES, FONTS, icons, images} from '../constants'
 import { Entypo, Ionicons } from '@expo/vector-icons';
 import { Icon } from 'react-native-elements';
-import { ListItem } from '../components';
+import { AddItem, ListItem } from '../components';
 
 const Home = () => {
 
@@ -114,6 +114,10 @@ const Home = () => {
                     image={require('../assets/images/credit_card1.png')} 
                     text="Appetiser Saver"
                     price="$8,183.00"
+                />
+
+                <AddItem 
+                    text="Open a New Account"
                 />
 
             </View>

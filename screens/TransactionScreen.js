@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { dummyData, COLORS, SIZES, FONTS, icons, images} from '../constants'
 import { Entypo, Ionicons } from '@expo/vector-icons';
@@ -6,6 +6,8 @@ import { Icon } from 'react-native-elements';
 import { AddItem, ListItem } from '../components';
 
 const TransactionScreen = ({navigation}) => {
+
+    const [selected, setSelected] = useState(0)
 
     function renderHeader() {
         return (
@@ -106,9 +108,67 @@ const TransactionScreen = ({navigation}) => {
         
     }
 
+    function renderBody() {
+        return(
+            <View style={{
+                flexDirection: 'row',
+                paddingTop: 30,
+                paddingHorizontal: 40
+            }}
+            >
+                <TouchableOpacity
+                    onPress={()=> {setSelected(0)}}
+                    style={{
+                        borderBottomColor: selected  == 0 ? COLORS.secondary : 'transparent',
+                        borderBottomWidth: 4,
+                        paddingHorizontal: 6,
+                        paddingBottom: 10
+                    }}
+                >
+                    <Text style={{
+                        fontWeight: selected  == 0 ? 'bold' : 'normal',
+                        ...FONTS.h3
+                    }}>Transactions</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={()=> {setSelected(1)}}
+                    style={{
+                        borderBottomColor: selected == 1 ? COLORS.secondary : 'transparent',
+                        borderBottomWidth: 4,
+                        paddingHorizontal: 6,
+                        marginLeft:30
+                    }}
+                >
+                    <Text style={{
+                        fontWeight: selected == 1 ? 'bold' : 'normal',
+                        ...FONTS.h3
+                    }}>Summary</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    // onPress={()=> {setSelected(!selected)}}
+                    style={{
+                        borderBottomColor: 'transparent',
+                        borderBottomWidth: 4,
+                        paddingHorizontal: 6,
+                        marginLeft:30
+                    }}
+                >
+                    <Text style={{
+                        // fontWeight: selected ? 'bold' : 'normal',
+                        ...FONTS.h3
+                    }}>Statements</Text>
+                </TouchableOpacity>
+
+            </View>
+        )
+    }
+
     return (
         <View>
             {renderHeader()}
+            {renderBody()}
         </View>
     )
 }

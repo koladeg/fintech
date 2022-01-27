@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ImageBackground, ScrollView, SectionList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { dummyData, COLORS, SIZES, FONTS, icons, images} from '../constants'
-import { Entypo, Ionicons } from '@expo/vector-icons';
+import { Entypo, Ionicons, EvilIcons } from '@expo/vector-icons';
 import { Icon } from 'react-native-elements';
 import { AddItem, ListItem } from '../components';
 
@@ -108,59 +108,106 @@ const TransactionScreen = ({navigation}) => {
         
     }
 
+    function renderList() {
+        return(
+            <View>
+                <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-evenly',
+                    paddingTop: 30,
+                    // paddingHorizontal: 40
+                }}
+                >
+                    <TouchableOpacity
+                        onPress={()=> {setSelected(0)}}
+                        style={{
+                            borderBottomColor: selected  == 0 ? COLORS.secondary : 'transparent',
+                            borderBottomWidth: 4,
+                            paddingHorizontal: 6,
+                            paddingBottom: 10
+                        }}
+                    >
+                        <Text style={{
+                            fontWeight: selected  == 0 ? 'bold' : 'normal',
+                            ...FONTS.h3
+                        }}>Transactions</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        onPress={()=> {setSelected(1)}}
+                        style={{
+                            borderBottomColor: selected == 1 ? COLORS.secondary : 'transparent',
+                            borderBottomWidth: 4,
+                            paddingHorizontal: 6,
+                        }}
+                    >
+                        <Text style={{
+                            fontWeight: selected == 1 ? 'bold' : 'normal',
+                            ...FONTS.h3
+                        }}>Summary</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        // onPress={()=> {setSelected(!selected)}}
+                        style={{
+                            borderBottomColor: 'transparent',
+                            borderBottomWidth: 4,
+                            paddingHorizontal: 6,
+                        }}
+                    >
+                        <Text style={{
+                            // fontWeight: selected ? 'bold' : 'normal',
+                            ...FONTS.h3
+                        }}>Statements</Text>
+                    </TouchableOpacity>
+
+                </View>
+                <View
+                style={{
+                    flexDirection: 'row',
+                    height: 40,
+                    alignItems: 'center',
+                    marginHorizontal: SIZES.padding,
+                    marginVertical: SIZES.base,
+                    paddingHorizontal: SIZES.radius,
+                    borderRadius: SIZES.radius,
+                    backgroundColor: COLORS.lightGray1
+                }}
+                >
+                    <EvilIcons name="search" size={35} color="grey" />
+
+                    <TextInput 
+                        style={{
+                            flex: 1,
+                            marginLeft: SIZES.radius,
+                            ...FONTS.h2
+                        }}
+                        placeholder="Search"
+                    />
+
+                </View>
+            </View>
+        )
+    }
+
     function renderBody() {
         return(
-            <View style={{
-                flexDirection: 'row',
-                paddingTop: 30,
-                paddingHorizontal: 40
-            }}
-            >
-                <TouchableOpacity
-                    onPress={()=> {setSelected(0)}}
-                    style={{
-                        borderBottomColor: selected  == 0 ? COLORS.secondary : 'transparent',
-                        borderBottomWidth: 4,
-                        paddingHorizontal: 6,
-                        paddingBottom: 10
-                    }}
-                >
-                    <Text style={{
-                        fontWeight: selected  == 0 ? 'bold' : 'normal',
-                        ...FONTS.h3
-                    }}>Transactions</Text>
-                </TouchableOpacity>
+            <View>
 
-                <TouchableOpacity
-                    onPress={()=> {setSelected(1)}}
-                    style={{
-                        borderBottomColor: selected == 1 ? COLORS.secondary : 'transparent',
-                        borderBottomWidth: 4,
-                        paddingHorizontal: 6,
-                        marginLeft:30
-                    }}
-                >
-                    <Text style={{
-                        fontWeight: selected == 1 ? 'bold' : 'normal',
-                        ...FONTS.h3
-                    }}>Summary</Text>
-                </TouchableOpacity>
+                <View style={styles.container}>
+                    {/* <SectionList
+                    sections={[
+                        {title: 'D', data: ['Devin', 'Dan', 'Dominic']},
+                        {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
+                    ]}
+                    renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
+                    renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
+                    keyExtractor={(item, index) => index}
+                    /> */}
 
-                <TouchableOpacity
-                    // onPress={()=> {setSelected(!selected)}}
-                    style={{
-                        borderBottomColor: 'transparent',
-                        borderBottomWidth: 4,
-                        paddingHorizontal: 6,
-                        marginLeft:30
-                    }}
-                >
-                    <Text style={{
-                        // fontWeight: selected ? 'bold' : 'normal',
-                        ...FONTS.h3
-                    }}>Statements</Text>
-                </TouchableOpacity>
-
+                    
+                </View>
+                
             </View>
         )
     }

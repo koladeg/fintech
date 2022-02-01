@@ -244,11 +244,11 @@ const TransactionScreen = ({navigation}) => {
     }
 
     return (
-        <View>
+        <ScrollView>
             {renderHeader()}
             {renderList()}
             {renderBody()}
-        </View>
+        </ScrollView>
     )
 }
 

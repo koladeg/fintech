@@ -3,7 +3,7 @@ import { Image, ImageBackground, ScrollView, SectionList, StyleSheet, Text, Text
 import { dummyData, COLORS, SIZES, FONTS, icons, images} from '../constants'
 import { Entypo, Ionicons, EvilIcons } from '@expo/vector-icons';
 import { Icon } from 'react-native-elements';
-import { AddItem, ListItem } from '../components';
+import { AddItem, ListItem, TransactionItem } from '../components';
 
 const TransactionScreen = ({navigation}) => {
 
@@ -110,7 +110,7 @@ const TransactionScreen = ({navigation}) => {
 
     function renderList() {
         return(
-            <View>
+            <View style={{ backgroundColor: COLORS.white }}>
                 <View style={{
                     flexDirection: 'row',
                     justifyContent: 'space-evenly',
@@ -170,7 +170,7 @@ const TransactionScreen = ({navigation}) => {
                     marginHorizontal: SIZES.padding,
                     marginVertical: SIZES.base,
                     paddingHorizontal: SIZES.radius,
-                    borderRadius: SIZES.radius,
+                    borderRadius: SIZES.padding,
                     backgroundColor: COLORS.lightGray1
                 }}
                 >
@@ -190,22 +190,53 @@ const TransactionScreen = ({navigation}) => {
         )
     }
 
+    const DATA = [
+        {
+          title: "Main dishes",
+          data: ["Pizza", "Burger", "Risotto"]
+        },
+        {
+          title: "Sides",
+          data: ["French Fries", "Onion Rings", "Fried Shrimps"]
+        },
+        {
+          title: "Drinks",
+          data: ["Water", "Coke", "Beer"]
+        },
+        {
+          title: "Desserts",
+          data: ["Cheese Cake", "Ice Cream"]
+        }
+      ];
+
     function renderBody() {
         return(
             <View>
 
                 <View style={styles.container}>
-                    {/* <SectionList
-                    sections={[
-                        {title: 'D', data: ['Devin', 'Dan', 'Dominic']},
-                        {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
-                    ]}
-                    renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-                    renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-                    keyExtractor={(item, index) => index}
-                    /> */}
+                    <SectionList
+                        sections={dummyData.transact}
+                        renderItem={({item}) => 
+                            <Text style={styles.item}>
+                                <TransactionItem 
+                                    image={item.image} 
+                                    description={item.description}
+                                    location={item.location}
+                                    amount={item.amount} 
+                                    date={item.date}    
+                                />
+                            </Text>}
+                        renderSectionHeader={({section}) => 
+                            (
+                                <View style={styles.header}>
+                                    <Text>{section.date}</Text>
+                                    <Text style={{ color: COLORS.gray }}>{section.day}</Text>
+                                </View>
+                            )
+                            }
+                        keyExtractor={(item, index) => item + index}
+                    />
 
-                    
                 </View>
                 
             </View>
@@ -215,6 +246,7 @@ const TransactionScreen = ({navigation}) => {
     return (
         <View>
             {renderHeader()}
+            {renderList()}
             {renderBody()}
         </View>
     )
@@ -227,6 +259,14 @@ const styles = StyleSheet.create({
     container:{
         // flex:1,
         backgroundColor: 'white'
+    },
+    header:{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        // width: '80%',
+        marginHorizontal: 10,
+        marginVertical: 10
     },
     addContainer:{
         marginLeft:30,

@@ -3,7 +3,7 @@ export const account = {
     pending: "2,368.14",
 };
 
-export const trendingCurrencies = [
+export const transact = [
     {
         id: 1,
         date: "21 OCT, 2022",
@@ -16,7 +16,7 @@ export const trendingCurrencies = [
         type: "I",      // I - Increased, D - Decreased
         description: "Bitcoin is a cryptocurrency invented in 2008 by an unknown person or group of people using the name Satoshi Nakamoto. The currency began use in 2009 when its implementation was released as open-source software.",
     
-        transactionHistory: [
+        data: [
             {
                 id: 1,
                 image: require("../assets/images/Biz1.jpeg"),
@@ -38,7 +38,7 @@ export const trendingCurrencies = [
             {
                 id: 3,
                 image: require("../assets/images/Biz3.png"),
-                description: "Sold Bitcoin",
+                description: "Coles Melbourne Central Essential Shop",
                 amount: "$42.00",
                 location: "Melbourne, VIC",
                 type: "S",
@@ -58,10 +58,10 @@ export const trendingCurrencies = [
         type: "D",
         description: "Ethereum is a decentralized, open-source blockchain featuring smart contract functionality. Ether is the native cryptocurrency of the platform. It is the second-largest cryptocurrency by market capitalization, after Bitcoin. Ethereum is the most actively used blockchain.",
     
-        transactionHistory: [
+        data: [
             {
                 id: 1,
-                image: require("../assets/images/Biz3.png"),
+                image: require("../assets/images/Biz4.jpeg"),
                 description: "Sold Ethereum",
                 amount: "$39.24",
                 location: "Melbourne, VIC",
@@ -70,7 +70,7 @@ export const trendingCurrencies = [
             },
             {
                 id: 2,
-                image: require("../assets/images/Biz4.jpeg"),
+                image: require("../assets/images/Biz3.png"),
                 description: "Bought Ethereum",
                 amount: "$53.00",
                 location: "Melbourne, VIC",
@@ -191,6 +191,6 @@ const chartOptions = [
     }
 ]
 
-const dummyData = { account, trendingCurrencies, transactionHistory, chartOptions };
+const dummyData = { account, transact, transactionHistory, chartOptions };
 
 export default dummyData;

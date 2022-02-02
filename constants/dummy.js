@@ -191,6 +191,37 @@ const chartOptions = [
     }
 ]
 
-const dummyData = { account, transact, transactionHistory, chartOptions };
+const monthList = [
+    {
+        id: 1,
+        label: "Apr"
+    },
+    {
+        id: 2,
+        label: "May"
+    },
+    {
+        id: 3,
+        label: "Jun"
+    },
+    {
+        id: 4,
+        label: "July"
+    },
+    {
+        id: 5,
+        label: "Aug"
+    },
+    {
+        id: 6,
+        label: "Sep"
+    },
+    {
+        id: 7,
+        label: "Oct"
+    }
+]
+
+const dummyData = { account, transact, transactionHistory, chartOptions, monthList };
 
 export default dummyData;

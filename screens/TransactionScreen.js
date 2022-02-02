@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Image, ImageBackground, ScrollView, SectionList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { FlatList, Image, ImageBackground, ScrollView, SectionList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { dummyData, COLORS, SIZES, FONTS, icons, images} from '../constants'
 import { Entypo, Ionicons, EvilIcons } from '@expo/vector-icons';
 import { Icon } from 'react-native-elements';
@@ -8,6 +8,7 @@ import { AddItem, ListItem, TransactionItem } from '../components';
 const TransactionScreen = ({navigation}) => {
 
     const [selected, setSelected] = useState(0)
+    const [selectedMonth, setSelectedMonth] = useState(1)
 
     function renderHeader() {
         return (
@@ -190,24 +191,6 @@ const TransactionScreen = ({navigation}) => {
         )
     }
 
-    const DATA = [
-        {
-          title: "Main dishes",
-          data: ["Pizza", "Burger", "Risotto"]
-        },
-        {
-          title: "Sides",
-          data: ["French Fries", "Onion Rings", "Fried Shrimps"]
-        },
-        {
-          title: "Drinks",
-          data: ["Water", "Coke", "Beer"]
-        },
-        {
-          title: "Desserts",
-          data: ["Cheese Cake", "Ice Cream"]
-        }
-      ];
 
     function renderBody() {
         return(
@@ -243,10 +226,119 @@ const TransactionScreen = ({navigation}) => {
         )
     }
 
+    function renderSummaryHeader() {
+        return (
+            <View 
+                style={[styles.scrollbutton, styles.shadow]}
+            >
+
+            <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-evenly',
+                    // paddingTop: 30,
+                    // paddingHorizontal: 40
+                }}
+                >
+
+                    <FlatList 
+                        horizontal
+                        data={dummyData.monthList}
+                        keyExtractor={(item) => `${item.id}`}
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={{
+                            marginTop: 5,
+                            marginBottom: 5
+                        }}
+                        renderItem={({item, index}) => (
+                            <TouchableOpacity 
+                                style={{
+                                    // marginLeft: SIZES.padding,
+                                    // marginRight: index == dummyData.monthList.
+                                    // length - 1 ? SIZES.padding : 0,
+                                    paddingHorizontal: SIZES.radius,
+                                }}
+                                onPress={() => {
+                                    setSelectedMonth(item.id)
+                                }}
+                            >
+                                <Text
+                                style={{
+                                    color: selectedMonth == item.id ? COLORS.secondary : COLORS.black,
+                                    ...FONTS.h4
+                                }}
+                                >
+                                    {item.label}
+                                </Text>
+                            </TouchableOpacity>
+                        )}
+                    />
+                
+                    {/* <TouchableOpacity
+                        onPress={()=> {setSelected(0)}}
+                        style={{
+                            borderBottomColor: selected  == 0 ? COLORS.secondary : 'transparent',
+                            borderBottomWidth: 4,
+                            paddingHorizontal: 6,
+                            paddingBottom: 10
+                        }}
+                    >
+                        <Text style={{
+                            fontWeight: selected  == 0 ? 'bold' : 'normal',
+                            ...FONTS.h3
+                        }}>Transactions</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        onPress={()=> {setSelected(1)}}
+                        style={{
+                            borderBottomColor: selected == 1 ? COLORS.secondary : 'transparent',
+                            borderBottomWidth: 4,
+                            paddingHorizontal: 6,
+                        }}
+                    >
+                        <Text style={{
+                            fontWeight: selected == 1 ? 'bold' : 'normal',
+                            ...FONTS.h3
+                        }}>Summary</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        // onPress={()=> {setSelected(!selected)}}
+                        style={{
+                            borderBottomColor: 'transparent',
+                            borderBottomWidth: 4,
+                            paddingHorizontal: 6,
+                        }}
+                    >
+                        <Text style={{
+                            // fontWeight: selected ? 'bold' : 'normal',
+                            ...FONTS.h3
+                        }}>Statements</Text>
+                    </TouchableOpacity> */}
+
+                </View>
+                <View
+                    style={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginTop:10
+                    }}
+                    >
+                        <Text style={{...FONTS.h1}}>${dummyData.account.balance}</Text>
+                        <Text style={{ marginTop: SIZES.base, color: COLORS.gray,}}>
+                            Total Amount of Spending
+                        </Text>
+
+                    </View>
+            </View>
+        )
+        
+    }
+
     return (
         <ScrollView>
             {renderHeader()}
-            {renderList()}
+            {renderSummaryHeader()}
             {renderBody()}
         </ScrollView>
     )
@@ -306,4 +398,26 @@ const styles = StyleSheet.create({
     doneButtonContainer:{
         marginTop:40
     },
+
+    shadow: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.30,
+        shadowRadius: 4.65,
+        elevation: 8
+    },
+
+    scrollbutton : {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: SIZES.padding * 0.5,
+        marginHorizontal: SIZES.radius,
+        paddingVertical: SIZES.radius,
+        paddingHorizontal: SIZES.radius,
+        backgroundColor: COLORS.white,
+        borderRadius: SIZES.radius,
+    }
 })
